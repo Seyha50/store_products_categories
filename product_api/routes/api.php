@@ -10,5 +10,6 @@ Route::apiResource('products', ProductController::class);
 
 Route::get('images/{path}', function (string $path) {
     abort_unless(Storage::disk('public')->exists($path), 404);
-    return Storage::disk('public')->response($path);
+    return response()->file(Storage::disk('public')->path($path));
+    // return Storage::disk('public')->response($path);
 })->where('path', '.*');
